@@ -3,7 +3,7 @@ var install = require('gulp-install');
 var conflict = require('gulp-conflict');
 var inquirer = require('inquirer');
 var mustache = require("gulp-mustache");
-var reanem = require('gulp-rename');
+var rename = require('gulp-rename');
 
 gulp.task('default', function( next ){
   inquirer.prompt([
