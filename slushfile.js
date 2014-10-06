@@ -3,14 +3,14 @@ var install = require('gulp-install');
 var conflict = require('gulp-conflict');
 var inquirer = require('inquirer');
 var mustache = require("gulp-mustache");
+var reanem = require('gulp-rename');
 
 gulp.task('default', function( next ){
   inquirer.prompt([
     {
       type    : 'input',
       name    : 'name',
-      message : 'Your extension name (e.g. for cytoscape-myextension write "myextension")',
-      default : gulp.args.join(' ') // default to calling name
+      message : 'Your extension name (e.g. for cytoscape-myextension write "myextension")'
     },
 
     {
@@ -42,7 +42,7 @@ gulp.task('default', function( next ){
     {
       type    : 'confirm',
       name    : 'moveon',
-      message : 'Continue?'
+      message : 'Create extension with above options?'
     }
   ],
   function( answers ){
@@ -57,8 +57,16 @@ gulp.task('default', function( next ){
       .pipe( conflict('./') )                // Confirms overwrites on file conflicts
       .pipe( gulp.dest('./') )               // Without __dirname here = relative to cwd
       .pipe( install() )                     // Run `bower install` and/or `npm install` if necessary
-      .on('finish', function () {
-        next();                              // Finished!
+      .on('finish', function(){
+        
+        gulp.src('./cytoscape-ext.js')
+          .pipe( rename('cytoscape-' + answers.name + '.js') )
+          .pipe( gulp.dest('./') )
+          .on('finish', function(){
+            next();
+          })
+        ;
+
       });
   });
 });
