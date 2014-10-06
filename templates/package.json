@@ -1,0 +1,33 @@
+{
+  "name": "{{fullName}}",
+  "version": "{{version}}",
+  "description": "{{description}}",
+  "main": "{{fullName}}.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/{{{githubProj}}}.git"
+  },
+  "keywords": [
+    "cytoscape",
+    "cytoscape.js",
+    "cytoscapejs",
+    "extension"
+  ],
+  "license": "{{license}}",
+  "bugs": {
+    "url": "https://github.com/{{{githubProj}}}/issues"
+  },
+  "homepage": "https://github.com/{{{githubProj}}}",
+  "devDependencies": {
+    "gulp": "^3.8.8",
+    "gulp-jshint": "^1.8.5",
+    "gulp-prompt": "^0.1.1",
+    "gulp-replace": "^0.4.0",
+    "gulp-shell": "^0.2.9",
+    "jshint-stylish": "^1.0.0",
+    "run-sequence": "^1.0.0"
+  }
+}

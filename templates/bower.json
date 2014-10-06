@@ -1,0 +1,24 @@
+{
+  "name": "{{fullName}}",
+  "version": "{{version}}",
+  "description": "{{description}}",
+  "main": "{{fullName}}.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/{{{githubProj}}}.git"
+  },
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "keywords": [
+    "cytoscape",
+    "cytoscape.js",
+    "cytoscapejs",
+    "extension"
+  ],
+  "license": "{{license}}"
+}

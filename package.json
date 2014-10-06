@@ -1,0 +1,30 @@
+{
+  "name": "slush-cytoscape-extension",
+  "version": "1.0.0",
+  "description": "A Cytoscape.js extension generator",
+  "main": "slushfile.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/cytoscape/slush-cytoscape-extension.git"
+  },
+  "keywords": [
+    "slushgenerator",
+    "cytoscape"
+  ],
+  "author": "Max Franz",
+  "license": "LGPL3+",
+  "bugs": {
+    "url": "https://github.com/cytoscape/slush-cytoscape-extension/issues"
+  },
+  "homepage": "https://github.com/cytoscape/slush-cytoscape-extension",
+  "dependencies": {
+    "gulp": "^3.8.8",
+    "gulp-conflict": "^0.2.0",
+    "gulp-install": "^0.2.0",
+    "gulp-mustache": "^0.4.0",
+    "inquirer": "^0.8.0"
+  }
+}
