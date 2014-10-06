@@ -1,6 +1,6 @@
 {
   "name": "slush-cytoscape-extension",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "A Cytoscape.js extension generator",
   "main": "slushfile.js",
   "scripts": {
@@ -22,6 +22,7 @@
   "homepage": "https://github.com/cytoscape/slush-cytoscape-extension",
   "dependencies": {
     "gulp": "^3.8.8",
+    "gulp-clean": "^0.3.1",
     "gulp-conflict": "^0.2.0",
     "gulp-install": "^0.2.0",
     "gulp-mustache": "^0.4.0",

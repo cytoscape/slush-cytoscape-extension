@@ -4,6 +4,7 @@ var conflict = require('gulp-conflict');
 var inquirer = require('inquirer');
 var mustache = require("gulp-mustache");
 var rename = require('gulp-rename');
+var clean = require('gulp-clean');
 
 gulp.task('default', function( next ){
   inquirer.prompt([
@@ -60,6 +61,7 @@ gulp.task('default', function( next ){
       .on('finish', function(){
         
         gulp.src('./cytoscape-ext.js')
+          .pipe( clean() ) // delete orig file
           .pipe( rename('cytoscape-' + answers.name + '.js') )
           .pipe( gulp.dest('./') )
           .on('finish', function(){
