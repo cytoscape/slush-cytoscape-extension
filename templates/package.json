@@ -12,7 +12,6 @@
   },
   "keywords": [
     "cytoscape",
-    "extension",
     "cyext"
   ],
   "license": "{{license}}",
