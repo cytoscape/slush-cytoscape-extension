@@ -25,14 +25,14 @@ Download the library:
 CommonJS:
 ```js
 var cytoscape = require('cytoscape');
-var {{name}} = require('{{name}}');
+var {{name}} = require('{{fullName}}');
 
 {{name}}( cytoscape ); // register extension
 ```
 
 AMD:
 ```js
-require(['cytoscape', '{{name}}'], function( cytoscape, {{name}} ){
+require(['cytoscape', '{{fullName}}'], function( cytoscape, {{name}} ){
   {{name}}( cytoscape ); // register extension
 });
 ```
