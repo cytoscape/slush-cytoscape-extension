@@ -12,9 +12,8 @@
   },
   "keywords": [
     "cytoscape",
-    "cytoscape.js",
-    "cytoscapejs",
-    "extension"
+    "extension",
+    "cyext"
   ],
   "license": "{{license}}",
   "bugs": {
