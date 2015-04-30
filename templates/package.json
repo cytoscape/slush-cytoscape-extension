@@ -3,6 +3,9 @@
   "version": "{{version}}",
   "description": "{{description}}",
   "main": "{{fullName}}.js",
+  "spm": {
+    "main": "{{fullName}}.js"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },

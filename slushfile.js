@@ -53,7 +53,12 @@ gulp.task('default', function( next ){
 
     answers.fullName = 'cytoscape-' + answers.name;
 
-    gulp.src( __dirname + '/templates/**' )  // Note use of __dirname to be relative to generator
+    gulp.src([
+      __dirname + '/templates/**',
+      __dirname + '/templates/.gitignore',
+      __dirname + '/templates/.npmignore',
+      __dirname + '/templates/.spmignore'
+    ])  // Note use of __dirname to be relative to generator
       .pipe( mustache(answers) )             // Mustache template support
       .pipe( conflict('./') )                // Confirms overwrites on file conflicts
       .pipe( gulp.dest('./') )               // Without __dirname here = relative to cwd
