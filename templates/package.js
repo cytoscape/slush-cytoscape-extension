@@ -11,7 +11,7 @@ Package.describe({
 });
 
 Package.onUse(function(api) {
-  api.use('maxkfranz:cytoscape');
+  api.use('maxkfranz:cytoscape@2.0.0');
   // api.use('jquery'); // uncomment if jquery is a dependency
   
   api.addFiles([
