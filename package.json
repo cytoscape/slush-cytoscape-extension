@@ -1,6 +1,6 @@
 {
   "name": "slush-cytoscape-extension",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "description": "A Cytoscape.js extension generator",
   "main": "slushfile.js",
   "scripts": {
