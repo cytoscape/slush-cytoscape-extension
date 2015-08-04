@@ -37,7 +37,7 @@ gulp.task('default', function( next ){
       type    : 'input',
       name    : 'license',
       message : 'License',
-      default : 'LGPL3+'
+      default : 'LGPL-3.0+'
     },
 
     {
@@ -64,7 +64,7 @@ gulp.task('default', function( next ){
       .pipe( gulp.dest('./') )               // Without __dirname here = relative to cwd
       .pipe( install() )                     // Run `bower install` and/or `npm install` if necessary
       .on('finish', function(){
-        
+
         gulp.src('./cytoscape-ext.js')
           .pipe( clean() ) // delete orig file
           .pipe( rename('cytoscape-' + answers.name + '.js') )
