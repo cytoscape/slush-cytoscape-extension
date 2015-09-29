@@ -11,19 +11,31 @@ gulp.task('default', function( next ){
     {
       type    : 'input',
       name    : 'name',
-      message : 'Your extension name (e.g. for cytoscape-myextension write "myextension")'
+      message : 'Your extension name (e.g. for cytoscape-my-extension write "my-extension")\n>'
     },
 
     {
       type    : 'input',
       name    : 'githubProj',
-      message : 'Github project name (e.g. org/cytoscape-myextension)'
+      message : 'Github project name (e.g. org/cytoscape-my-extension)\n>'
+    },
+
+    {
+      type    : 'list',
+      name    : 'type',
+      message : 'Extension type',
+      choices : [
+        { 'value': 'core', name: 'core : Adds a function to the core' },
+        { 'value': 'collection', name: 'collection : Adds a function to collections' },
+        { 'value': 'layout', name: 'layout : Adds a layout' },
+        { 'value': 'renderer', name: 'renderer : Adds a renderer' }
+      ]
     },
 
     {
       type    : 'input',
       name    : 'description',
-      message : 'A one-line description of your extension'
+      message : 'A one-line description of your extension\n>'
     },
 
     {
@@ -52,6 +64,12 @@ gulp.task('default', function( next ){
     }
 
     answers.fullName = 'cytoscape-' + answers.name;
+    answers.camel = answers.name.replace(/(-\w)/g, function( v ){
+      return v[1].toUpperCase();
+    });
+
+    // e.g. answers.layout = true for templating
+    answers[ answers.type ] = true;
 
     gulp.src([
       __dirname + '/templates/**',
