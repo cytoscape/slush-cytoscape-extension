@@ -25,8 +25,8 @@ gulp.task('default', function( next ){
       name    : 'type',
       message : 'Extension type',
       choices : [
-        { 'value': 'core', name: 'core : Adds a function to the core' },
-        { 'value': 'collection', name: 'collection : Adds a function to collections' },
+        { 'value': 'core', name: 'core : Adds a function to the core (graph)' },
+        { 'value': 'collection', name: 'collection : Adds a function to collections (nodes/edges)' },
         { 'value': 'layout', name: 'layout : Adds a layout' },
         { 'value': 'renderer', name: 'renderer : Adds a renderer' }
       ]
@@ -64,7 +64,7 @@ gulp.task('default', function( next ){
     }
 
     answers.fullName = 'cytoscape-' + answers.name;
-    answers.camel = answers.name.replace(/(-\w)/g, function( v ){
+    answers.camelName = answers.name.replace(/(-\w)/g, function( v ){
       return v[1].toUpperCase();
     });
 
