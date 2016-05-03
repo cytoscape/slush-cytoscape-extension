@@ -49,7 +49,7 @@ gulp.task('default', function( next ){
       type    : 'input',
       name    : 'license',
       message : 'License',
-      default : 'LGPL-3.0+'
+      default : 'MIT'
     },
 
     {
