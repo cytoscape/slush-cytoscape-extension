@@ -1,6 +1,5 @@
 {
   "name": "{{fullName}}",
-  "version": "{{version}}",
   "description": "{{description}}",
   "main": "{{fullName}}.js",
   "repository": {
