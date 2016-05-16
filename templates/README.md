@@ -9,7 +9,7 @@
 
 ## Dependencies
 
- * Cytoscape.js >=x.y.z
+ * Cytoscape.js ^x.y.z
  * <List your dependencies here please>
 
 
