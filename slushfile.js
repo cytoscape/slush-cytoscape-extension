@@ -27,8 +27,8 @@ gulp.task('default', function( next ){
       choices : [
         { 'value': 'core', name: 'core : Adds a function to the core (graph)' },
         { 'value': 'collection', name: 'collection : Adds a function to collections (nodes/edges)' },
-        { 'value': 'layout', name: 'layout : Adds a layout' },
-        { 'value': 'renderer', name: 'renderer : Adds a renderer' }
+        { 'value': 'layout', name: 'layout : Adds a layout' }
+        //{ 'value': 'renderer', name: 'renderer : Adds a renderer' }
       ]
     },
 
