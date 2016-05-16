@@ -192,7 +192,7 @@
       return this; // chaining
     };
 
-    cytoscape( 'layout', '{{name}}', Layout ); // register with cytoscape.js
+    cytoscape( 'layout', '{{camelName}}', Layout ); // register with cytoscape.js
 
     {{/layout}}
     {{#renderer}}
