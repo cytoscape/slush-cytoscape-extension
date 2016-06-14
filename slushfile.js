@@ -40,9 +40,9 @@ gulp.task('default', function( next ){
 
     {
       type    : 'input',
-      name    : 'version',
-      message : 'Version number',
-      default : '1.0.0'
+      name    : 'cyVersion',
+      message : 'Compatible Cytoscape.js semver',
+      default : '^2.7.0'
     },
 
     {
@@ -62,6 +62,8 @@ gulp.task('default', function( next ){
     if( !answers.moveon ){
       return next();
     }
+
+    answers.version = '0.0.0';
 
     answers.fullName = 'cytoscape-' + answers.name;
     answers.camelName = answers.name.replace(/(-\w)/g, function( v ){
