@@ -59,7 +59,7 @@
       var eles = options.eles;
       var nodes = eles.nodes();
 
-      var getRandomPos = function( i, ele ){
+      var getRandomPos = function( ele, i ){
         return {
           x: Math.round( Math.random() * 100 ),
           y: Math.round( Math.random() * 100 )
@@ -165,7 +165,7 @@
         // calculate for a while (you might use the edges here)
         for( var i = 0; i < pass.maxIterations; i++ ){
           nodeJsons.forEach(function( nodeJson, j ){
-            nodeJson.position = getRandomPos( j, nodeJson );
+            nodeJson.position = getRandomPos( nodeJson, j );
           });
 
           if( i % pass.refreshIterations === 0 ){ // cheaper to not broadcast all the time
