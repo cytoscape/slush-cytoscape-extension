@@ -33,6 +33,19 @@ gulp.task('default', function( next ){
     },
 
     {
+      type    : 'list',
+      name    : 'layoutType',
+      message : 'Layout type',
+      choices : [
+        { 'value': 'dicrete', name: 'Dicrete : Immediately sets end positions based on a function' },
+        { 'value': 'continuous', name: 'Continuous : Sets positions based on multiple iterations (e.g. force-directed)' }
+      ],
+      when: function( answers ){
+        return answers.type === 'layout';
+      }
+    },
+
+    {
       type    : 'input',
       name    : 'description',
       message : 'A one-line description of your extension\n>'
@@ -42,7 +55,7 @@ gulp.task('default', function( next ){
       type    : 'input',
       name    : 'cyVersion',
       message : 'Compatible Cytoscape.js semver',
-      default : '^2.7.0'
+      default : '^3.0.0'
     },
 
     {
@@ -72,6 +85,9 @@ gulp.task('default', function( next ){
 
     // e.g. answers.layout = true for templating
     answers[ answers.type ] = true;
+
+    answers.continuous = answers.layout && answers.layoutType === 'continuous';
+    answers.dicrete = answers.layout && answers.layoutType === 'dicrete';
 
     gulp.src([
       __dirname + '/templates/**',

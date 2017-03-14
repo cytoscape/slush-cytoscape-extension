@@ -1,7 +1,7 @@
 ;(function(){ 'use strict';
 
   // registers the extension on a cytoscape lib ref
-  var register = function( cytoscape ){
+  var register = function( cytoscape{{#continuous}}, weaver{{/continuous}} ){
 
     if( !cytoscape ){ return; } // can't register if cytoscape unspecified
     {{#collection}}
@@ -31,8 +31,10 @@
 
     var defaults = {
       // define the default options for your layout here
-      refreshInterval: 16, // in ms
+{{#continuous}}
       refreshIterations: 10, // iterations until thread sends an update
+      maxIterations: 1000, // max iterations before the layout will bail out
+{{/continuous}}
       fit: true
     };
 
@@ -63,7 +65,7 @@
           y: Math.round( Math.random() * 100 )
         };
       };
-
+      {{#discrete}}
       // dicrete/synchronous layouts can just use this helper and all the
       // busywork is handled for you, including std opts:
       // - fit
@@ -73,13 +75,14 @@
       // - animationEasing
       nodes.layoutPositions( layout, options, getRandomPos );
 
-      return this; // or...
-
+      return this;
+      {{/discrete}}
+      {{#continuous}}
       // continuous/asynchronous layouts need to do things manually:
       // (this example uses a thread, but you could use a fabric to get even
       // better performance if your algorithm allows for it)
 
-      var thread = this.thread = cytoscape.thread();
+      var thread = this.thread = weaver.thread();
       thread.require( getRandomPos, 'getRandomPos' );
 
       // to indicate we've started
@@ -88,7 +91,7 @@
       // for thread updates
       var firstUpdate = true;
       var id2pos = {};
-      var updateTimeout;
+      var updateRequested = false;
 
       // update node positions
       var update = function(){
@@ -108,18 +111,25 @@
         }
       };
 
+      var requestUpdate = function(){
+        if( !updateRequested ){
+          requestAnimationFrame(function(){
+            update();
+
+            updateRequested = false;
+          });
+
+          updateRequested = true;
+        }
+      };
+
       // update the node positions when notified from the thread but
       // rate limit it a bit (don't want to overwhelm the main/ui thread)
       thread.on('message', function( e ){
         var nodeJsons = e.message;
         nodeJsons.forEach(function( n ){ id2pos[n.data.id] = n.position; });
 
-        if( !updateTimeout ){
-          updateTimeout = setTimeout( function(){
-            update();
-            updateTimeout = null;
-          }, options.refreshInterval );
-        }
+        requestUpdate();
       });
 
       // we want to keep the json sent to threads slim and fast
@@ -141,7 +151,8 @@
       // data to pass to thread
       var pass = {
         eles: eles.map( eleAsJson ),
-        refreshIterations: options.refreshIterations
+        refreshIterations: options.refreshIterations,
+        maxIterations: options.maxIterations
         // maybe some more options that matter to the calculations here ...
       };
 
@@ -152,7 +163,7 @@
         var nodeJsons = pass.eles.filter(function(e){ return e.group === 'nodes'; });
 
         // calculate for a while (you might use the edges here)
-        for( var i = 0; i < 100000; i++ ){
+        for( var i = 0; i < pass.maxIterations; i++ ){
           nodeJsons.forEach(function( nodeJson, j ){
             nodeJson.position = getRandomPos( j, nodeJson );
           });
@@ -167,8 +178,10 @@
       });
 
       return this; // chaining
+      {{/continuous}}
     };
 
+    {{#continuous}}
     Layout.prototype.stop = function(){
       // continuous/asynchronous layout may want to set a flag etc to let
       // run() know to stop
@@ -176,8 +189,6 @@
       if( this.thread ){
         this.thread.stop();
       }
-
-      this.trigger('layoutstop');
 
       return this; // chaining
     };
@@ -191,6 +202,7 @@
 
       return this; // chaining
     };
+    {{/continuous}}
 
     cytoscape( 'layout', '{{camelName}}', Layout ); // register with cytoscape.js
 
@@ -203,7 +215,9 @@
   };
 
   if( typeof module !== 'undefined' && module.exports ){ // expose as a commonjs module
-    module.exports = register;
+    module.exports = function( cytoscape{{#continuous}}, weaver{{/continuous}} ){
+      register( cytoscape{{#continuous}}, weaver || require('weaverjs'){{/continuous}} );
+    };
   } else if( typeof define !== 'undefined' && define.amd ){ // expose as an amd/requirejs module
     define('{{fullName}}', function(){
       return register;
