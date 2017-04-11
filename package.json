@@ -1,6 +1,6 @@
 {
   "name": "slush-cytoscape-extension",
-  "version": "1.5.1",
+  "version": "2.0.0",
   "description": "A Cytoscape.js extension generator",
   "main": "slushfile.js",
   "scripts": {
@@ -15,7 +15,7 @@
     "cytoscape"
   ],
   "author": "Max Franz",
-  "license": "LGPL-3.0+",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/cytoscape/slush-cytoscape-extension/issues"
   },
