@@ -10,6 +10,12 @@ gulp.task('default', function( next ){
   inquirer.prompt([
     {
       type    : 'input',
+      name    : 'author',
+      message : 'The name of the author or organisation\n>'
+    },
+
+    {
+      type    : 'input',
       name    : 'name',
       message : 'Your extension name (e.g. for cytoscape-my-extension write "my-extension")\n>'
     },
@@ -91,25 +97,14 @@ gulp.task('default', function( next ){
 
     gulp.src([
       __dirname + '/templates/**',
-      __dirname + '/templates/.gitignore',
-      __dirname + '/templates/.npmignore',
-      __dirname + '/templates/.spmignore'
+      __dirname + '/templates/.*',
     ])  // Note use of __dirname to be relative to generator
       .pipe( mustache(answers) )             // Mustache template support
       .pipe( conflict('./') )                // Confirms overwrites on file conflicts
       .pipe( gulp.dest('./') )               // Without __dirname here = relative to cwd
       .pipe( install() )                     // Run `bower install` and/or `npm install` if necessary
       .on('finish', function(){
-
-        gulp.src('./cytoscape-ext.js')
-          .pipe( clean() ) // delete orig file
-          .pipe( rename('cytoscape-' + answers.name + '.js') )
-          .pipe( gulp.dest('./') )
-          .on('finish', function(){
-            next();
-          })
-        ;
-
+        next();
       });
   });
 });
