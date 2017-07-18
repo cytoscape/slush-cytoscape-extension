@@ -5,6 +5,8 @@ var inquirer = require('inquirer');
 var mustache = require("gulp-mustache");
 var rename = require('gulp-rename');
 var clean = require('gulp-clean');
+var path = require('path');
+var filter = require('gulp-filter');
 
 gulp.task('default', function( next ){
   inquirer.prompt([
@@ -38,18 +40,18 @@ gulp.task('default', function( next ){
       ]
     },
 
-    {
-      type    : 'list',
-      name    : 'layoutType',
-      message : 'Layout type',
-      choices : [
-        { 'value': 'dicrete', name: 'Dicrete : Immediately sets end positions based on a function' },
-        { 'value': 'continuous', name: 'Continuous : Sets positions based on multiple iterations (e.g. force-directed)' }
-      ],
-      when: function( answers ){
-        return answers.type === 'layout';
-      }
-    },
+    // {
+    //   type    : 'list',
+    //   name    : 'layoutType',
+    //   message : 'Layout type',
+    //   choices : [
+    //     { 'value': 'dicrete', name: 'Dicrete : Immediately sets end positions based on a function' },
+    //     { 'value': 'continuous', name: 'Continuous : Sets positions based on multiple iterations (e.g. force-directed)' }
+    //   ],
+    //   when: function( answers ){
+    //     return answers.type === 'layout';
+    //   }
+    // },
 
     {
       type    : 'input',
@@ -92,17 +94,30 @@ gulp.task('default', function( next ){
     // e.g. answers.layout = true for templating
     answers[ answers.type ] = true;
 
-    answers.continuous = answers.layout && answers.layoutType === 'continuous';
-    answers.dicrete = answers.layout && answers.layoutType === 'dicrete';
+    // answers.continuous = answers.layout && answers.layoutType === 'continuous';
+    // answers.dicrete = answers.layout && answers.layoutType === 'dicrete';
 
-    gulp.src([
-      __dirname + '/templates/**',
-      __dirname + '/templates/.*',
-    ])  // Note use of __dirname to be relative to generator
-      .pipe( mustache(answers) )             // Mustache template support
-      .pipe( conflict('./') )                // Confirms overwrites on file conflicts
-      .pipe( gulp.dest('./') )               // Without __dirname here = relative to cwd
-      .pipe( install() )                     // Run `bower install` and/or `npm install` if necessary
+    var srcs = [
+      __dirname + '/templates/*',
+      __dirname + '/templates/test/**',
+      __dirname + '/templates/src/*',
+      __dirname + '/templates/.*'
+    ];
+
+    if( answers.layout ){
+      srcs.push( __dirname + '/templates/src/layout/**' );
+    } else if( answers.collection ){
+      srcs.push( __dirname + '/templates/src/collection/**' );
+    } else if( answers.core ){
+      srcs.push( __dirname + '/templates/src/core/**' );
+    }
+
+    gulp.src( srcs, { base: __dirname + '/templates', nodir: true } )
+      .pipe( mustache(answers) )              // Mustache template support
+      .pipe( conflict('./') )                 // Confirms overwrites on file conflicts
+      .pipe( gulp.dest('./') )                // Without __dirname here = relative to cwd
+      .pipe( filter(['**', '!*bower.json']) ) // Don't bower install
+      .pipe( install() )                      // Run `npm install` if necessary
       .on('finish', function(){
         next();
       });
