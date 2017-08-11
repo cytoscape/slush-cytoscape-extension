@@ -26,25 +26,25 @@ ES import:
 
 ```js
 import cytoscape from 'cytoscape';
-import {{name}} from '{{fullName}}';
+import {{camelName}} from '{{fullName}}';
 
-cytoscape.use( {{name}} );
+cytoscape.use( {{camelName}} );
 ```
 
 CommonJS require:
 
 ```js
 let cytoscape = require('cytoscape');
-let {{name}} = require('{{fullName}}');
+let {{camelName}} = require('{{fullName}}');
 
-cytoscape.use( {{name}} ); // register extension
+cytoscape.use( {{camelName}} ); // register extension
 ```
 
 AMD:
 
 ```js
-require(['cytoscape', '{{fullName}}'], function( cytoscape, {{name}} ){
-  {{name}}( cytoscape ); // register extension
+require(['cytoscape', '{{fullName}}'], function( cytoscape, {{camelName}} ){
+  {{camelName}}( cytoscape ); // register extension
 });
 ```
 
