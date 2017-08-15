@@ -17,6 +17,7 @@ const defaults = Object.freeze({
   padding: undefined, // padding around layout
   boundingBox: undefined, // constrain layout bounds; { x1, y1, x2, y2 } or { x1, y1, w, h }
   spacingFactor: undefined, // a positive value which adjusts spacing between nodes (>1 means greater than usual spacing)
+  nodeDimensionsIncludeLabels: true, // whether labels should be included in determining the space used by a node
 
   // layout event callbacks
   ready: function(){}, // on layoutready
@@ -44,7 +45,11 @@ class Layout {
     };
 
     // TODO replace this with your own positioning algorithm
-    let getNodePos = getRandomPos;
+    let getNodePos = function( ele, i ){
+      let dims = ele.layoutDimensions( options ); // the space used by the node
+
+      return getRandomPos( ele, i );
+    };
 
     // .layoutPositions() automatically handles the layout busywork for you
     nodes.layoutPositions( layout, options, getNodePos );
