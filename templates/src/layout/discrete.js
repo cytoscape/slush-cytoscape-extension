@@ -1,5 +1,7 @@
 // n.b. .layoutPositions() handles all these options for you
 
+const assign = require('../assign');
+
 const defaults = Object.freeze({
   // animation
   animate: undefined, // whether or not to animate the layout
@@ -23,7 +25,7 @@ const defaults = Object.freeze({
 
 class Layout {
   constructor( options ){
-    this.options = options;
+    this.options = assign( {}, defaults, options );
   }
 
   run(){
