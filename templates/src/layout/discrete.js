@@ -7,7 +7,7 @@ const defaults = Object.freeze({
   animate: undefined, // whether or not to animate the layout
   animationDuration: undefined, // duration of animation in ms, if enabled
   animationEasing: undefined, // easing of animation, if enabled
-  animateFilter: function( node, i ){ return true; }, // whether to animate specific nodes when animation is on; non-animated nodes immediately go to their final positions
+  animateFilter: ( node, i ) => true, // whether to animate specific nodes when animation is on; non-animated nodes immediately go to their final positions
 
   // viewport
   pan: undefined, // pan the graph to the provided position, given as { x, y }
@@ -19,10 +19,11 @@ const defaults = Object.freeze({
   boundingBox: undefined, // constrain layout bounds; { x1, y1, x2, y2 } or { x1, y1, w, h }
   spacingFactor: undefined, // a positive value which adjusts spacing between nodes (>1 means greater than usual spacing)
   nodeDimensionsIncludeLabels: true, // whether labels should be included in determining the space used by a node
+  transform: ( node, pos ) => pos, // a function that applies a transform to the final node position
 
   // layout event callbacks
-  ready: function(){}, // on layoutready
-  stop: function(){} // on layoutstop
+  ready: () => {}, // on layoutready
+  stop: () => {} // on layoutstop
 });
 
 class Layout {
