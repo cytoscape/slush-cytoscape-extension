@@ -18,7 +18,7 @@ const defaults = Object.freeze({
   padding: undefined, // padding around layout
   boundingBox: undefined, // constrain layout bounds; { x1, y1, x2, y2 } or { x1, y1, w, h }
   spacingFactor: undefined, // a positive value which adjusts spacing between nodes (>1 means greater than usual spacing)
-  nodeDimensionsIncludeLabels: true, // whether labels should be included in determining the space used by a node
+  nodeDimensionsIncludeLabels: undefined, // whether labels should be included in determining the space used by a node
   transform: ( node, pos ) => pos, // a function that applies a transform to the final node position
 
   // layout event callbacks
