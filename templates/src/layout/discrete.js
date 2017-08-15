@@ -7,6 +7,7 @@ const defaults = Object.freeze({
   animate: undefined, // whether or not to animate the layout
   animationDuration: undefined, // duration of animation in ms, if enabled
   animationEasing: undefined, // easing of animation, if enabled
+  animateFilter: function( node, i ){ return true; }, // whether to animate specific nodes when animation is on; non-animated nodes immediately go to their final positions
 
   // viewport
   pan: undefined, // pan the graph to the provided position, given as { x, y }
