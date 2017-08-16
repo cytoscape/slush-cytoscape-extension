@@ -63,7 +63,7 @@ gulp.task('default', function( next ){
       type    : 'input',
       name    : 'cyVersion',
       message : 'Compatible Cytoscape.js semver',
-      default : '^3.0.0'
+      default : '^3.2.0'
     },
 
     {
