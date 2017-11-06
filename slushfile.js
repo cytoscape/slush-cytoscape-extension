@@ -101,7 +101,9 @@ gulp.task('default', function( next ){
       __dirname + '/templates/*',
       __dirname + '/templates/test/**',
       __dirname + '/templates/src/*',
-      __dirname + '/templates/.*'
+      __dirname + '/templates/.*',
+      __dirname + '/templates/.gitignore',
+      __dirname + '/templates/.npmignore',
     ];
 
     if( answers.layout ){
