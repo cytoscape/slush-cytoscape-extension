@@ -29,7 +29,5 @@
     "gulp-rename": "^1.2.0",
     "inquirer": "^0.10.0",
     "gulp-filter": "^5.0.0"
-  },
-  "devDependencies": {
   }
 }
