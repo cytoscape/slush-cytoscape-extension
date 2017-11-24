@@ -4,8 +4,7 @@
 
 ## Description
 
-{{description}}
-
+{{description}} ([demo]({{{ghPagesUrl}}}))
 
 ## Dependencies
 

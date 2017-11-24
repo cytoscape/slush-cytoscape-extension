@@ -24,8 +24,14 @@ gulp.task('default', function( next ){
 
     {
       type    : 'input',
-      name    : 'githubProj',
-      message : 'Github project name (e.g. org/cytoscape-my-extension)\n>'
+      name    : 'ghOrg',
+      message : 'Github organisation name (e.g. my-org)\n>'
+    },
+
+    {
+      type    : 'input',
+      name    : 'ghRepo',
+      message : 'Github repo name (e.g. cytoscape-my-extension)\n>'
     },
 
     {
@@ -90,6 +96,10 @@ gulp.task('default', function( next ){
     answers.camelName = answers.name.replace(/(-\w)/g, function( v ){
       return v[1].toUpperCase();
     });
+
+    answers.ghProj = answers.ghOrg + '/' + answers.ghRepo;
+    answers.ghPagesUrl = 'https://' + answers.ghOrg + '.github.io/' + answers.ghRepo;
+    answers.ghRepoUrl = 'https://github.com/' + answers.ghOrg + '/' + answers.ghRepo + '.git';
 
     // e.g. answers.layout = true for templating
     answers[ answers.type ] = true;
