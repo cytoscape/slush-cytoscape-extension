@@ -3,7 +3,10 @@
   "version": "{{version}}",
   "description": "{{description}}",
   "main": "{{fullName}}.js",
-  "author": "{{author}}",
+  "author": {
+    "name": "{{author}}",
+    "email": "{{authorEmail}}"
+  },
   "scripts": {
     "postpublish": "run-s gh-pages:demo gh-pages:deploy gh-pages:clean",
     "gh-pages:demo": "cpy demo.html . --rename=index.html",

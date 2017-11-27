@@ -18,6 +18,12 @@ gulp.task('default', function( next ){
 
     {
       type    : 'input',
+      name    : 'authorEmail',
+      message : 'The email address of the author or organisation\n>'
+    },
+
+    {
+      type    : 'input',
       name    : 'name',
       message : 'Your extension name (e.g. for cytoscape-my-extension write "my-extension")\n>'
     },
