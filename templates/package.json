@@ -18,7 +18,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/{{{githubProj}}}.git"
+    "url": "https://github.com/{{{ghProj}}}.git"
   },
   "keywords": [
     "cytoscape",
@@ -26,9 +26,9 @@
   ],
   "license": "{{license}}",
   "bugs": {
-    "url": "https://github.com/{{{githubProj}}}/issues"
+    "url": "https://github.com/{{{ghProj}}}/issues"
   },
-  "homepage": "https://github.com/{{{githubProj}}}",
+  "homepage": "https://github.com/{{{ghProj}}}",
   "devDependencies": {
     "babel-core": "^6.24.1",
     "babel-loader": "^7.0.0",
