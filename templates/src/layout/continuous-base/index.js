@@ -171,4 +171,4 @@ class ContinuousLayout {
   }
 }
 
-module.exports = Layout;
+module.exports = ContinuousLayout;

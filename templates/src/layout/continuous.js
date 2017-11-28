@@ -10,6 +10,8 @@ const optFn = ( opt, ele ) => {
   }
 };
 
+const defaults = {}; // TODO define
+
 class Layout extends ContinuousLayout {
   constructor( options ){
     super( assign( {}, defaults, options ) );
@@ -27,11 +29,11 @@ class Layout extends ContinuousLayout {
     } );
 
     // regular edge springs
-    s.edges.forEach( e => {
-      let scratch = this.getScratch( n ); // per-element layout data/state, x/y, etc.
+    state.edges.forEach( e => {
+      let scratch = this.getScratch( e ); // per-element layout data/state, x/y, etc.
 
       // example of setting per-element state based on an option value/function
-      scratch.foo = optFn( state.foo, n );
+      scratch.foo = optFn( state.foo, e );
     } );
   }
 
