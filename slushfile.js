@@ -13,13 +13,13 @@ gulp.task('default', function( next ){
     {
       type    : 'input',
       name    : 'author',
-      message : 'The name of the author or organisation\n>'
+      message : 'The name of the author (person or organisation)\n>'
     },
 
     {
       type    : 'input',
       name    : 'authorEmail',
-      message : 'The email address of the author or organisation\n>'
+      message : 'The email address of the author\n>'
     },
 
     {
@@ -86,6 +86,18 @@ gulp.task('default', function( next ){
     },
 
     {
+      type    : 'input',
+      name    : 'copyrightHolder',
+      message : 'Copyright holder (e.g. company name)\n>',
+      default : function( answers ){
+        return answers.author;
+      },
+      when    : function( answers ){
+        return answers.license.toUpperCase() === 'MIT';
+      }
+    },
+
+    {
       type    : 'confirm',
       name    : 'moveon',
       message : 'Create extension with above options?'
@@ -95,6 +107,10 @@ gulp.task('default', function( next ){
     if( !answers.moveon ){
       return next();
     }
+
+    answers.year = ( new Date() ).getFullYear();
+
+    answers.mit = answers.license.toUpperCase() === 'MIT';
 
     answers.version = '0.0.0';
 
@@ -121,6 +137,10 @@ gulp.task('default', function( next ){
       __dirname + '/templates/.gitignore',
       __dirname + '/templates/.npmignore',
     ];
+
+    if( !answers.mit ){
+      srcs.push('!' + __dirname + '/templates/LICENSE');
+    }
 
     if( answers.layout ){
       srcs.push( __dirname + '/templates/src/layout/**' );
